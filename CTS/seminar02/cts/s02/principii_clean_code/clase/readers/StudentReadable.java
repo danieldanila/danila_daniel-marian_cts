@@ -22,7 +22,7 @@ public class StudentReadable extends AplicantReadable {
 			super.readAplicant(scanner, student);
 			int anStudii  = scanner.nextInt();
 			String facultate = (scanner.next()).toString();
-			student.setAn_studii(anStudii);
+			student.setAnStudii(anStudii);
 			student.setFacultate(facultate);
 			studenti.add(student);
 		}
