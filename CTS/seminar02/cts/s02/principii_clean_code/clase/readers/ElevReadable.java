@@ -7,27 +7,28 @@ import java.util.List;
 import java.util.Scanner;
 
 import cts.s02.principii_clean_code.clase.Aplicant;
-import cts.s02.principii_clean_code.clase.Student;
+import cts.s02.principii_clean_code.clase.Elev;
 
-public class StudentReadable extends AplicantReadable {
+public class ElevReadable extends AplicantReadable {
 
 	@Override
 	public List<Aplicant> readAplicants(String fileName) throws FileNotFoundException {
 		Scanner scanner = new Scanner(new File(fileName));
 		scanner.useDelimiter(",|\n");
-		List<Aplicant> studenti = new ArrayList<>();
+		List<Aplicant> elevi = new ArrayList<>();
 
 		while (scanner.hasNext()) {
-			Student student = new Student();
-			super.readAplicant(scanner, student);
-			int anStudii  = scanner.nextInt();
-			String facultate = (scanner.next()).toString();
-			student.setAnStudii(anStudii);
-			student.setFacultate(facultate);
-			studenti.add(student);
+			Elev elev = new Elev();
+			super.readAplicant(scanner, elev);
+			int clasa = scanner.nextInt();
+			String tutore = scanner.next();
+			elev.setClasa(clasa);
+			elev.setTutore(tutore);
+			elevi.add(elev);
 		}
+
 		scanner.close();
-		return studenti;
+		return elevi;
 	}
 
 }
