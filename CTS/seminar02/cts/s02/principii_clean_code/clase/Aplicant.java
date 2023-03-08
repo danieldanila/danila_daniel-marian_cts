@@ -8,7 +8,6 @@ public abstract class Aplicant{
 	protected int nr_proiecte;
 	protected String[] denumireProiect;
 	
-	
 	public String getNume() {
 		return nume;
 	}
@@ -39,9 +38,6 @@ public abstract class Aplicant{
 	public void setPunctaj(int punctaj) {
 		this.punctaj = punctaj;
 	}
-	
-	
-
 	
 	public Aplicant() {
 		super();
