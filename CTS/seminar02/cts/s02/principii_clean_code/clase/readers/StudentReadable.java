@@ -9,29 +9,24 @@ import java.util.Scanner;
 import cts.s02.principii_clean_code.clase.Aplicant;
 import cts.s02.principii_clean_code.clase.Student;
 
-public class StudentReadable implements AplicantReadable {
+public class StudentReadable extends AplicantReadable {
 
 	@Override
 	public List<Aplicant> readAplicants(String fileName) throws FileNotFoundException {
-		Scanner input = new Scanner(new File(fileName));
-		input.useDelimiter(",|\n");
+		Scanner scanner = new Scanner(new File(fileName));
+		scanner.useDelimiter(",|\n");
 		List<Aplicant> studenti = new ArrayList<>();
 
-		while (input.hasNext()) {
-			String nume = input.next();
-			String prenume = (input.next()).toString();
-			int varsta = Integer.valueOf(input.nextInt());
-			int punctaj = Integer.valueOf(input.nextInt());
-			int nr = Integer.valueOf(input.nextInt());
-			String[] vect = new String[5];
-			for (int i = 0; i < nr; i++)
-				vect[i] = input.next();
-			int an_studii = input.nextInt();
-			String facultate = (input.next()).toString();
-			Student s = new Student(nume, prenume, varsta, punctaj, nr, vect, facultate, an_studii);
-			studenti.add(s);
+		while (scanner.hasNext()) {
+			Student student = new Student();
+			super.readAplicant(scanner, student);
+			int anStudii  = scanner.nextInt();
+			String facultate = (scanner.next()).toString();
+			student.setAn_studii(anStudii);
+			student.setFacultate(facultate);
+			studenti.add(student);
 		}
-		input.close();
+		scanner.close();
 		return studenti;
 	}
 

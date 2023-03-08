@@ -1,12 +1,16 @@
 package cts.s02.principii_clean_code.clase;
 
+import java.util.Arrays;
+
 public abstract class Aplicant{
 	protected String nume;
 	protected String prenume;
 	protected int varsta;
 	protected int punctaj;
-	protected int nr_proiecte;
+	protected int numarProiecte;
 	protected String[] denumireProiect;
+	
+	private static int pragPunctaj = 80;
 	
 	public String getNume() {
 		return nume;
@@ -26,12 +30,14 @@ public abstract class Aplicant{
 	public void setVarsta(int varsta) {
 		this.varsta = varsta;
 	}
-	public void statut(){
-		if(punctaj>80)
-			System.out.println("Aplicantul "+nume+" "+prenume+" a fost acceptat.");
-		else
-			System.out.println("Aplicantul "+nume+" "+prenume+" nu a fost acceptat.");
-		}
+	
+	public void afisareStatus() {
+		System.out.println("Aplicantul " + this.nume + " " + this.prenume 
+				+ (this.punctaj > Aplicant.pragPunctaj ? " " : " nu " ) 
+				+ "a fost acceptat.");
+ 
+	}
+	
 	public int getPunctaj() {
 		return punctaj;
 	}
@@ -49,14 +55,43 @@ public abstract class Aplicant{
 		this.prenume = prenume;
 		this.varsta = varsta;
 		this.punctaj = punctaj;
-		this.nr_proiecte = nr_proiecte;
+		this.numarProiecte = nr_proiecte;
 		this.denumireProiect = denumireProiect;
 	}
 	public int getNr_proiecte() {
-		return nr_proiecte;
+		return numarProiecte;
 	}
-	public void setNr_proiecte(int nr_proiecte) {
-		this.nr_proiecte = nr_proiecte;
+	public void setProiecte(int numarProiecte, String[] denumiriProiecte) {
+		this.numarProiecte = numarProiecte;
+		this.denumireProiect = new String[this.numarProiecte];
+		for(int i = 0; i < this.numarProiecte; i++) {
+			this.denumireProiect[i] = denumiriProiecte[i];
+		}
 	}
-
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[nume=");
+		builder.append(nume);
+		builder.append(", prenume=");
+		builder.append(prenume);
+		builder.append(", varsta=");
+		builder.append(varsta);
+		builder.append(", punctaj=");
+		builder.append(punctaj);
+		builder.append(", nr_proiecte=");
+		builder.append(numarProiecte);
+		builder.append(", denumireProiect=");
+		builder.append(Arrays.toString(denumireProiect));
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	public abstract void afisareFinantare();
+	
+	protected void afisareFinantare(String tipAplicant, int sumaFinantata) {
+		System.out.println(this.nume + " " + this.prenume + " primeste " + sumaFinantata 
+				+ " euro/zi in proiect");
+	}
 }
